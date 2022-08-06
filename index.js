@@ -459,6 +459,11 @@ document.addEventListener("readystatechange", () => {
             index_class++
           ) {
             let current_class = classes[index_class];
+            
+            // replace characters "\n" in start and end of current_class by spaces
+            current_class = current_class.replace(/^\n+/, "").replace(/\n+$/, "");
+            current_class = current_class.trim();
+
             if (!current_class) continue;
 
             // on recupere la position du contenu de la classe/propriété
