@@ -168,6 +168,7 @@ document.addEventListener("readystatechange", () => {
       className = className.trim();
 
       if (!((element.__styles__ ?? []) || className.length === 0)) continue;
+    
 
       let groups = [[]],
         groups_originals = [[]];
@@ -176,8 +177,15 @@ document.addEventListener("readystatechange", () => {
       let [braces_opened, parenthesis_opened, brackets_opened] = [0, 0, 0];
       let original_class = "";
 
+      const comments = className.match(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm) ?? [];
+      for (let i = 0; i < comments.length; i++) {
+        element.setAttribute('class',((element.className.baseVal ?? element.className).replace(comments[i], "")));
+      }
+
+
       while (--limit) {
         current_char = className[++current_index] ?? "";
+        
 
         if (current_char === "{") braces_opened++;
         if (current_char === "(") parenthesis_opened++;
@@ -216,6 +224,8 @@ document.addEventListener("readystatechange", () => {
 
       groups_originals[++current_class] = original_class;
       groups_originals = groups_originals.filter((group) => group.length > 0);
+
+      console.log({groups_originals})
 
       for (
         let index_group = 0;
