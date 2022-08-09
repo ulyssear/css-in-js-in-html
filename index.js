@@ -225,8 +225,6 @@ document.addEventListener("readystatechange", () => {
       groups_originals[++current_class] = original_class;
       groups_originals = groups_originals.filter((group) => group.length > 0);
 
-      console.log({groups_originals})
-
       for (
         let index_group = 0;
         index_group < groups_originals.length;
@@ -662,10 +660,10 @@ document.addEventListener("readystatechange", () => {
     if (">" === selector[0]) {
       selector = selector.substring(1).trim();
       elements_queried = Array.from(element.querySelectorAll(selector)).filter(
-        (_element) => {
-          return Array.from(element.children).includes(_element);
-        }
-      );
+        (e) => {
+          const first_selector = selector.split(">")[0];
+          return e.closest(first_selector).parentElement === element;
+        });
     } else if ("+" === selector[0]) {
       selector = selector.substring(1).trim();
       const { nextElementSibling } = element;
