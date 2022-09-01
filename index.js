@@ -510,7 +510,6 @@ document.addEventListener("readystatechange", () => {
             // si la propriété css existe et dont la valeur n'a pas encore été assigné à la propriété...
             if (
               !isVariable &&
-              current_element.style.hasOwnProperty(property) &&
               current_element.style[property] !== value
             ) {
               // si la propriété est transition...
