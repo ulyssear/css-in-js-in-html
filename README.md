@@ -13,7 +13,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ulyssear/css-in-js-in-html">
-    <h1 align="center" style="border:0">CSS in JS in HTML</h1>
+    <h1 align="center">CSS in JS in HTML</h1>
   </a>
 
   <p align="center">
@@ -64,8 +64,6 @@
 ## About The Project
 
 <!-- TODO : ADD dynamic examples -->
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS properties with also some useful features to design your dynamic HTML elements.
 
