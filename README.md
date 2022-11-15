@@ -73,7 +73,7 @@ CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS propert
 
 ### Built With
 
-[![Javascript][Javascript.com]][Javascript-url]
+[![Javascript][Javascript-shield]][Javascript-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -201,5 +201,5 @@ Project Link: [https://github.com/ulyssear/css-in-js-in-html](https://github.com
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/ulyssearnaud
 [product-screenshot]: images/screenshot.png
-[JavaScript.com]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
+[JavaScript-shield]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
 [JavaScript-url]: https://www.javascript.com/
