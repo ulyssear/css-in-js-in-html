@@ -1,0 +1,27 @@
+{
+  "name": "@ulyssear/css-in-js-in-html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "rome format --write --indent-style tab --line-width 160 --quote-style single index.js",
+    "lint": "rome check index.js",
+    "lint:fix": "rome check --apply-suggested index.js",
+    "build": "esbuild index.js --bundle --outfile=index.min.js --minify --sourcemap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ulyssear/css-in-js-in-html.git"
+  },
+  "author": "Ulysse ARNAUD",
+  "bugs": {
+    "url": "https://github.com/ulyssear/css-in-js-in-html/issues"
+  },
+  "homepage": "https://github.com/ulyssear/css-in-js-in-html#readme",
+  "license": "MIT",
+  "dependencies": {
+    "esbuild": "^0.16.13",
+    "rome": "^11.0.0"
+  }
+}
