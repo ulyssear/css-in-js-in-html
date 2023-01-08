@@ -21,7 +21,6 @@ const dict_characters = {
 
 const generic_entry = {
 	original: undefined,
-	media_query: undefined,
 	events: undefined,
 	selectors: undefined,
 	classes: undefined,
@@ -245,6 +244,12 @@ function apply_custom_class(element, className) {
 		let classes_to_apply = [];
 		for (let j = 0; j < classes.length; j++) {
 			const class_entry = classes[j];
+
+			if ('[' === class_entry[0]) {
+				apply_custom_class(element, class_entry);
+				continue;
+			}
+
 			const lastIndexOf = class_entry.lastIndexOf('-');
 			const class_name = class_entry.substring(0, lastIndexOf);
 			const class_value = class_entry.substring(lastIndexOf + 1, class_entry.length);
@@ -354,7 +359,7 @@ function do_apply(element, selectors, classes, events, media_query) {
 }
 
 function init(document, event = undefined) {
-	const tag_console = `init : ${(event ? `(${event.type})` : '')}`;
+	const tag_console = `init : ${event ? `(${event.type})` : ''}`;
 	console.time(tag_console);
 	console.log(event?.type);
 
