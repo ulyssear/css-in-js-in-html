@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "format": "rome format --write --indent-style tab --line-width 160 --quote-style single index.js",
-    "lint": "rome check index.js",
-    "lint:fix": "rome check --apply-suggested index.js",
-    "build": "esbuild index.js --bundle --outfile=index.min.js --minify --sourcemap"
+    "lint": "rome check src/index.js",
+    "lint:fix": "rome check --apply-suggested src/index.js",
+    "build": "esbuild src/index.js --bundle --outfile=build/index.min.js --minify --sourcemap",
+    "build:hot": "npm run build -- --watch",
+    "start": "concurrently -n \"build,serve\" \"npm run build:hot\" \"npx serve build\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,12 @@
   "license": "MIT",
   "dependencies": {
     "esbuild": "^0.16.13",
-    "rome": "^11.0.0"
+    "rome": "^11.0.0",
+    "serve": "^14.1.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "jest": "^29.3.1",
+    "jest-puppeteer": "^6.2.0"
   }
 }

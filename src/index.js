@@ -267,6 +267,9 @@ function apply_custom_class(element, className) {
 
 function do_apply(element, selectors, classes, events, media_query) {
 	if (media_query) {
+		if ('(' !== media_query[0]) {
+			media_query = `(${media_query})`;
+		}	
 		if (!window.matchMedia(media_query).matches) {
 			return;
 		}
@@ -361,7 +364,7 @@ function do_apply(element, selectors, classes, events, media_query) {
 function init(document, event = undefined) {
 	const tag_console = `init : ${event ? `(${event.type})` : ''}`;
 	console.time(tag_console);
-	console.log(event?.type);
+	// console.log(event?.type);
 
 	const elements = document.querySelectorAll('*:not(head, head *)[class]');
 
@@ -374,7 +377,7 @@ function init(document, event = undefined) {
 		}
 	}
 
-	const observer = new MutationObserver(init);
+	const observer = new MutationObserver(init_observer);
 	observer.observe(document, {
 		attributes: true,
 		attributeFilter: ['class'],
@@ -388,9 +391,28 @@ function init(document, event = undefined) {
 	document.body.removeAttribute('hidden');
 }
 
+function init_observer(record) {
+	console.time('init_observer');
+	for (let i = 0; i < record.length; i++) {
+		const { type, target, attributeName } = record[i];
+		if (type === 'attributes' && attributeName === 'class') {
+			apply_custom_class(target, target.className);
+		}
+		if (type === 'childList') {
+			const elements = target.querySelectorAll('*:not(head, head *)[class]');
+			for (let j = 0; j < elements.length; j++) {
+				const element = elements[j];
+				apply_custom_class(element, element.className);
+			}
+		}
+	}
+	console.timeEnd('init_observer');
+}
+
 const CSS_IN_JS_IN_HTML = {
 	// apply: apply_custom_class,
 	init,
+	fromClassNameToGroups: split_classname_to_classes_groups
 };
 
 window.CSS_IN_JS_IN_HTML = CSS_IN_JS_IN_HTML;
