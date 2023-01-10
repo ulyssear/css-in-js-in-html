@@ -365,7 +365,7 @@ function do_apply(element, selectors, classes, events, media_query) {
 
 function init(document, event = undefined) {
 	const tag_console = `init : ${event ? `(${event.type})` : ''}`;
-	console.time(tag_console);
+	// console.time(tag_console);
 	// console.log(event?.type);
 
 	const elements = document.querySelectorAll('*:not(head, head *)[class]');
@@ -387,14 +387,13 @@ function init(document, event = undefined) {
 		subtree: true,
 	});
 
-	console.timeEnd(tag_console);
+	// console.timeEnd(tag_console);
 
-	document.body.removeAttribute('aria-busy');
-	document.body.removeAttribute('hidden');
+	document.documentElement.removeAttribute('aria-busy');
 }
 
 function init_observer(record) {
-	console.time('init_observer');
+	// console.time('init_observer');
 	for (let i = 0; i < record.length; i++) {
 		const { type, target, attributeName } = record[i];
 		if (type === 'attributes' && attributeName === 'class') {
@@ -408,7 +407,7 @@ function init_observer(record) {
 			}
 		}
 	}
-	console.timeEnd('init_observer');
+	// console.timeEnd('init_observer');
 }
 
 const CSS_IN_JS_IN_HTML = {
