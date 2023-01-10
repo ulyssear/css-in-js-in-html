@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "format": "rome format --write --indent-style tab --line-width 160 --quote-style single index.js",
+    "format": "rome format --write --indent-style tab --line-width 160 --quote-style single src/index.js",
     "lint": "rome check src/index.js",
     "lint:fix": "rome check --apply-suggested src/index.js",
     "build": "esbuild src/index.js --bundle --outfile=build/index.min.js --minify --sourcemap",

@@ -271,7 +271,7 @@ function do_apply(element, selectors, classes, events, media_query) {
 	if (media_query) {
 		if ('(' !== media_query[0]) {
 			media_query = `(${media_query})`;
-		}	
+		}
 		if (!window.matchMedia(media_query).matches) {
 			return;
 		}
@@ -414,7 +414,7 @@ function init_observer(record) {
 const CSS_IN_JS_IN_HTML = {
 	// apply: apply_custom_class,
 	init,
-	fromClassNameToGroups: split_classname_to_classes_groups
+	fromClassNameToGroups: split_classname_to_classes_groups,
 };
 
 window.CSS_IN_JS_IN_HTML = CSS_IN_JS_IN_HTML;
