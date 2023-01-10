@@ -82,4 +82,6 @@ module.exports = describe('Selectors', () => {
         }
     });
     
+    // TODO: Tests for @lookout selector
+
 });
