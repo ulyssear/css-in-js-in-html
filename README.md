@@ -95,8 +95,20 @@ CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS propert
 
 1. Import `index.min.js` (or `index.js`) in your HTML file
    ```html
-   <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html/index.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@0.1.0/build/index.min.js"></script>
    ```
+
+2. Add one line of CSS to hide the page while building (and permits to hide elements with hidden attribute)
+
+```css
+html[aria-busy="true"], [hidden] { display: none!important; }
+```
+
+3. Call `CSS_in_JS_in_HTML.init(document,null)` to start the library. The optimal use case is to call it in the `DOMContentLoaded` event.
+
+```js
+document.addEventListener('DOMContentLoaded', () => CSS_IN_JS_IN_HTML.init(document, null));
+```
 
 #### Manual installation
 
