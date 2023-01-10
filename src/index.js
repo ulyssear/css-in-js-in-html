@@ -234,7 +234,7 @@ function split_classname_to_classes_groups(className) {
 }
 
 function apply_custom_class(element, className) {
-	window.addEventListener('resize', () => apply_custom_class(element, className));
+	// window.addEventListener('resize', () => apply_custom_class(element, className));
 
 	const group_classes = split_classname_to_classes_groups(className);
 
@@ -250,7 +250,7 @@ function apply_custom_class(element, className) {
 				continue;
 			}
 
-			const lastIndexOf = class_entry.lastIndexOf('-');
+			const lastIndexOf = class_entry.lastIndexOf('-[');
 			const class_name = class_entry.substring(0, lastIndexOf);
 			const class_value = class_entry.substring(lastIndexOf + 1, class_entry.length);
 			classes_to_apply.push({
@@ -260,6 +260,8 @@ function apply_custom_class(element, className) {
 		}
 		element.className = element.className.replace(className, '').trim();
 		// console.log({classes_to_apply})
+
+		// console.log({ selectors, classes_to_apply, events, media_query });
 
 		do_apply(element, selectors, classes_to_apply, events, media_query);
 	}
