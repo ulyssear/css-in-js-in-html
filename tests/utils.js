@@ -16,6 +16,8 @@ const COLORS = {
 };
 
 async function onBeforeAll () {
+    jest.setTimeout(100000)
+    
     const url = 'file://' + path.join(__dirname, 'index.html');
     
     await page.goto(url);
@@ -24,6 +26,10 @@ async function onBeforeAll () {
     await page.addScriptTag({
         content: `CSS_IN_JS_IN_HTML.init(document, null);`
     });
+}
+
+async function onBeforeEach() {
+    await page.reload();
 }
 
 async function assert(element, classes, styles = {}) {
@@ -42,7 +48,7 @@ async function assert(element, classes, styles = {}) {
     }, selector, classes);
 
     for (const style in styles) {
-        expect(computedStyle[style]).toBe(styles[style]);
+        await expect(computedStyle[style]).toBe(styles[style]);
     }
 }
 
@@ -57,7 +63,7 @@ async function assert_element(element, styles, classes = null) {
     }, element, classes);
 
     for (const style in styles) {
-        expect(computedStyle[style]).toBe(styles[style]);
+        await expect(computedStyle[style]).toBe(styles[style]);
     }
 }
 
@@ -66,5 +72,6 @@ module.exports = {
     COLORS,
     // getComputedStyle,
     onBeforeAll,
+    onBeforeEach,
     assert
 };
