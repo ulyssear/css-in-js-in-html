@@ -104,7 +104,7 @@ CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS propert
 html[aria-busy="true"], [hidden] { display: none!important; }
 ```
 
-3. Call `CSS_in_JS_in_HTML.init(document,null)` to start the library. The optimal use case is to call it in the `DOMContentLoaded` event.
+3. Call `CSS_IN_JS_IN_HTML.init(document,null)` to start the library. The optimal use case is to call it in the `DOMContentLoaded` event.
 
 ```js
 document.addEventListener('DOMContentLoaded', () => CSS_IN_JS_IN_HTML.init(document, null));
