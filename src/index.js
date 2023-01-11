@@ -258,16 +258,17 @@ function apply_custom_class(element, className) {
 				value: class_value.substring(1, class_value.length - 1),
 			});
 		}
-		element.className = element.className.replace(className, '').trim();
+		const original_class = className; 
+		// element.className = element.className.replace(className, '').trim();
 		// console.log({classes_to_apply})
 
 		// console.log({ selectors, classes_to_apply, events, media_query });
 
-		do_apply(element, selectors, classes_to_apply, events, media_query);
+		do_apply(element, selectors, classes_to_apply, events, media_query, original_class);
 	}
 }
 
-function do_apply(element, selectors, classes, events, media_query) {
+function do_apply(element, selectors, classes, events, media_query, original_class) {
 	if (media_query) {
 		if ('(' !== media_query[0]) {
 			media_query = `(${media_query})`;
@@ -353,13 +354,24 @@ function do_apply(element, selectors, classes, events, media_query) {
 		return;
 	}
 
+	let to_remove_class = false;
+
 	for (let j = 0; j < elements_to_apply.length; j++) {
 		const element_to_apply = elements_to_apply[j];
 		if (!element_to_apply) continue;
 		for (let k = 0; k < classes.length; k++) {
 			const { name, value } = classes[k];
+			if (!name) continue;
 			element_to_apply.style.setProperty(name, value);
+			if (to_remove_class) continue;
+			if (element.className.includes(original_class)) {
+				to_remove_class = true;
+			}
 		}
+	}
+
+	if (to_remove_class) {
+		element.className = element.className.replace(original_class, '');
 	}
 }
 
