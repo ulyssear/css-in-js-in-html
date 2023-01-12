@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => CSS_IN_JS_IN_HTML.init(docum
    ```
 2. Import `index.min.js` (or `index.js`) in your HTML file
    ```html
-    <script src="path/to/css-in-js-in-html/index.min.js"></script>
+    <script src="path/to/css-in-js-in-html/build/index.min.js"></script>
     ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
