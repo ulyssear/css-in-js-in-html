@@ -74,6 +74,7 @@ CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS propert
 ### Built With
 
 [![Javascript][Javascript-shield]][Javascript-url]
+[![NPM][NPM-shield]][NPM-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -83,11 +84,24 @@ CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS propert
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
-
 ### Prerequisites
 
+The followed prerequisites are the minimum requirements to use the library. The library may work with older browsers with the polyfills but it's not guaranteed (and recommended).
 
+__Modern browers__
+  - Chrome 9+
+  - Edge 12+
+  - Firefox 6+
+  - Safari 5.1+
+  - Opera 12.1+
+
+__Browsers for mobile__
+  - IOS Safari 5.1+
+  - UC Browser for Android 11
+  - Firefox for Android 49
+
+__Older browsers__
+  - IE10+
 
 ### Installation
 
@@ -99,16 +113,14 @@ CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS propert
    ```
 
 2. Add one line of CSS to hide the page while building (and permits to hide elements with hidden attribute)
-
-```css
-html[aria-busy="true"], [hidden] { display: none!important; }
-```
+  ```css
+  html[aria-busy="true"], [hidden] { display: none!important; }
+  ```
 
 3. Call `CSS_IN_JS_IN_HTML.init(document,null)` to start the library. The optimal use case is to call it in the `DOMContentLoaded` event.
-
-```js
-document.addEventListener('DOMContentLoaded', () => CSS_IN_JS_IN_HTML.init(document, null));
-```
+  ```js
+  document.addEventListener('DOMContentLoaded', () => CSS_IN_JS_IN_HTML.init(document, null));
+  ```
 
 #### Manual installation
 
@@ -118,11 +130,31 @@ document.addEventListener('DOMContentLoaded', () => CSS_IN_JS_IN_HTML.init(docum
    ```
 2. Import `index.min.js` (or `index.js`) in your HTML file
    ```html
-    <script src="path/to/css-in-js-in-html/index.min.js"></script>
+    <script src="path/to/css-in-js-in-html/build/index.min.js"></script>
     ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+#### (Optional) Add polyfills
 
+Some polyfills are required to make the library work on older browsers (IE9 and above). You can add them by importing the following file in your HTML file.
+
+```html
+<script type="text/javascript" src="path/to/css-in-js-in-html/build/polyfill.min.js"></script>
+```
+
+The polyfills permit to use the following features :
+- `window.getComputedStyle`
+- `Array.isArray`
+- `Array.prototype.lastIndexOf`
+- `Array.prototype.reduce`
+- `addEventListener`
+- `window.matchMedia`
+- `document.querySelectorAll`
+- `document.querySelector`
+- `String.prototype.trim`
+
+It's recommended to not use the polyfills if you don't need to support old browsers.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- USAGE EXAMPLES -->
@@ -187,16 +219,6 @@ Project Link: [https://github.com/ulyssear/css-in-js-in-html](https://github.com
 
 
 
-<!-- TODO : ACKNOWLEDGMENTS ?
-## Acknowledgments
-
-* []()
-* []()
-* []()
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
--->
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -215,3 +237,5 @@ Project Link: [https://github.com/ulyssear/css-in-js-in-html](https://github.com
 [product-screenshot]: images/screenshot.png
 [JavaScript-shield]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
 [JavaScript-url]: https://www.javascript.com/
+[NPM-shield]: https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white
+[NPM-url]: https://www.npmjs.com/
