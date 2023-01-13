@@ -258,7 +258,7 @@ function apply_custom_class(element, className) {
 				value: class_value.substring(1, class_value.length - 1),
 			});
 		}
-		const original_class = className; 
+		const original_class = className;
 		// element.className = element.className.replace(className, '').trim();
 		// console.log({classes_to_apply})
 

@@ -7,6 +7,7 @@
     "test": "jest",
     "format": "rome format --write --indent-style tab --line-width 160 --quote-style single src/index.js",
     "format:polyfill": "rome format --write --indent-style tab --line-width 160 --quote-style single src/polyfill.js",
+    "format:all": "rome format --write --indent-style tab --line-width 160 --quote-style single src",
     "lint": "rome check src/index.js",
     "lint:polyfill": "rome check src/polyfill.js",
     "lint:fix": "rome check --apply-suggested src/index.js",
