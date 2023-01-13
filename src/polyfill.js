@@ -5,7 +5,7 @@ if (!window.getComputedStyle) {
 			(this.getPropertyValue = function (t) {
 				var n = /(\-([a-z]){1})/g;
 				return (
-					t == 'float' && (t = 'styleFloat'),
+					t === 'float' && (t = 'styleFloat'),
 					n.test(t) &&
 						(t = t.replace(n, function () {
 							return arguments[2].toUpperCase();
@@ -32,10 +32,10 @@ if (!Array.prototype.lastIndexOf) {
 			throw new TypeError();
 		}
 
-		var n,
-			k,
-			t = Object(this),
-			len = t.length >>> 0;
+		var n;
+		var k;
+		var t = Object(this);
+		var len = t.length >>> 0;
 		if (len === 0) {
 			return -1;
 		}
@@ -43,9 +43,9 @@ if (!Array.prototype.lastIndexOf) {
 		n = len - 1;
 		if (arguments.length > 1) {
 			n = Number(arguments[1]);
-			if (n != n) {
+			if (n !== n) {
 				n = 0;
-			} else if (n != 0 && n != 1 / 0 && n != -(1 / 0)) {
+			} else if (n !== 0 && n !== 1 / 0 && n !== -(1 / 0)) {
 				n = (n > 0 || -1) * Math.floor(Math.abs(n));
 			}
 		}
@@ -83,7 +83,7 @@ if (!Array.prototype.reduce) {
 		};
 	}
 	function addEvent(on, fn, self) {
-		return (self = this).attachEvent('on' + on, function (e) {
+		return (self = this).attachEvent(`on${on}`, function (e) {
 			var e = e || win.event;
 			e.preventDefault =
 				e.preventDefault ||
@@ -126,9 +126,9 @@ window.matchMedia ||
 		var styleMedia = window.styleMedia || window.media;
 
 		if (!styleMedia) {
-			var style = document.createElement('style'),
-				script = document.getElementsByTagName('script')[0],
-				info = null;
+			var style = document.createElement('style');
+			var script = document.getElementsByTagName('script')[0];
+			var info = null;
 
 			style.type = 'text/css';
 			style.id = 'matchmediajs-test';
@@ -143,7 +143,7 @@ window.matchMedia ||
 
 			styleMedia = {
 				matchMedium: function (media) {
-					var text = '@media ' + media + '{ #matchmediajs-test { width: 1px; } }';
+					var text = `@media ${media}{ #matchmediajs-test { width: 1px; } }`;
 
 					if (style.styleSheet) {
 						style.styleSheet.cssText = text;
@@ -166,13 +166,13 @@ window.matchMedia ||
 
 if (!document.querySelectorAll) {
 	document.querySelectorAll = function (selectors) {
-		var style = document.createElement('style'),
-			elements = [],
-			element;
+		var style = document.createElement('style');
+		var elements = [];
+		var element;
 		document.documentElement.firstChild.appendChild(style);
 		document._qsa = [];
 
-		style.styleSheet.cssText = selectors + '{x-qsa:expression(document._qsa && document._qsa.push(this))}';
+		style.styleSheet.cssText = `${selectors}{x-qsa:expression(document._qsa && document._qsa.push(this))}`;
 		window.scrollBy(0, 0);
 		style.parentNode.removeChild(style);
 
