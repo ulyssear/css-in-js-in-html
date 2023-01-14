@@ -269,6 +269,7 @@ function apply_custom_class(element, className) {
 }
 
 function do_apply(element, selectors, classes, events, media_query, original_class) {
+	// console.log({element,selectors,classes,original_class})
 	if (media_query) {
 		if ('(' !== media_query[0]) {
 			media_query = `(${media_query})`;
@@ -288,7 +289,7 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 		for (let j = 0; j < selectors.length; j++) {
 			const selector = selectors[j];
 			if (typeof selector === 'object') {
-				const { tag } = selector;
+				const { tag, selectors: _selectors } = selector;
 				if (tag === 'lookout') {
 					let before_to_apply = [];
 					let after_to_apply = [];
@@ -318,12 +319,24 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 						}
 					}
 				}
-				if ('>' === tag && selector.selectors) {
-					const { selectors } = selector;
+				// For each children within children of element matching selector
+				if ('>' === tag && _selectors) {
+					// console.log({tag, _selectors, children: element.children})
 					for (let k = 0; k < element.children.length; k++) {
 						const child = element.children[k];
-						do_apply(child, selectors, classes, events, media_query);
+						if (!child.matches(_selectors)) continue;
+						// if ('>' === tag) console.log({_selectors, child, classes})
+						do_apply(child, null, classes, events, media_query);
 					}
+				}
+				//
+				// Next sibling of element matching selector
+				if ('+' === tag && _selectors) {
+					const { selectors } = selector;
+					const { nextElementSibling } = element;
+					if (!nextElementSibling) continue;
+					if (!nextElementSibling.matches(selectors)) continue;
+					do_apply(nextElementSibling, null, classes, events, media_query);
 				}
 				continue;
 			}
@@ -376,7 +389,7 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 }
 
 function init(document, event = undefined) {
-	const tag_console = `init : ${event ? `(${event.type})` : ''}`;
+	// const tag_console = `init : ${event ? `(${event.type})` : ''}`;
 	// console.time(tag_console);
 	// console.log(event?.type);
 
@@ -400,6 +413,13 @@ function init(document, event = undefined) {
 	});
 
 	// console.timeEnd(tag_console);
+
+	for (let i = 0; i < elements.length; i++) {
+		const element = elements[i];
+		if (0 === element.className.length) {
+			element.removeAttribute('class');
+		}
+	}
 
 	document.documentElement.removeAttribute('aria-busy');
 }
