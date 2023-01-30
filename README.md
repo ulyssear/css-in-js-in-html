@@ -109,7 +109,7 @@ __Older browsers__
 
 1. Import `index.min.js` (or `index.js`) in your HTML file
    ```html
-   <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@0.1.0/build/index.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@0.1.4/build/index.min.js"></script>
    ```
 
 2. Add one line of CSS to hide the page while building (and permits to hide elements with hidden attribute)
