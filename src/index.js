@@ -245,7 +245,7 @@ function apply_custom_class(element, className) {
 		for (let j = 0; j < classes.length; j++) {
 			const class_entry = classes[j];
 
-			if ('[' === class_entry[0]) {
+			if ('[' === class_entry[0] && ']' !== class_entry[1]) {
 				apply_custom_class(element, class_entry);
 				continue;
 			}
@@ -283,14 +283,14 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 
 	if (selectors) {
 		elements_to_apply = [];
-		if (typeof selectors === 'object' && !Array.isArray(selectors)) {
+		if ('object' === typeof selectors && !Array.isArray(selectors)) {
 			selectors = [selectors];
 		}
 		for (let j = 0; j < selectors.length; j++) {
-			const selector = selectors[j];
-			if (typeof selector === 'object') {
+			let selector = selectors[j];
+			if ('object' === typeof selector) {
 				const { tag, selectors: _selectors } = selector;
-				if (tag === 'lookout') {
+				if ('lookout' === tag) {
 					let before_to_apply = [];
 					let after_to_apply = [];
 					const { before, after } = selector;
@@ -340,7 +340,10 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 				}
 				continue;
 			}
-			const elements = element.querySelectorAll(selector);
+			if (/\@current/.test(selector)) {
+				selector = selector.replace(/\@current/g, retrieve_current_selector(element));
+			}
+			const elements = 'HTML' !== selector ? element.querySelectorAll(selector) : [document.documentElement];
 			for (let k = 0; k < elements.length; k++) {
 				elements_to_apply.push(elements[k]);
 			}
@@ -421,18 +424,24 @@ function init(document, event = undefined) {
 		}
 	}
 
+	if (!document.documentElement) return;
+	if (!document.documentElement.hasAttribute('aria-busy')) return;
+
 	document.documentElement.removeAttribute('aria-busy');
 }
 
 function init_observer(record) {
 	// console.time('init_observer');
+	const elements = [];
 	for (let i = 0; i < record.length; i++) {
 		const { type, target, attributeName } = record[i];
-		if (type === 'attributes' && attributeName === 'class') {
-			apply_custom_class(target, target.className);
+		if ('attributes' === type && 'class' === attributeName) {
+			// apply_custom_class(target, target.className);
+			elements.push(target);
 		}
 		if (type === 'childList') {
-			const elements = target.querySelectorAll('*:not(head, head *)[class]');
+			// const elements = target.querySelectorAll('*:not(head, head *)[class]');
+			elements.push(...target.querySelectorAll('*:not(head, head *)[class]'));
 			for (let j = 0; j < elements.length; j++) {
 				const element = elements[j];
 				apply_custom_class(element, element.className);
@@ -447,5 +456,39 @@ const CSS_IN_JS_IN_HTML = {
 	init,
 	fromClassNameToGroups: split_classname_to_classes_groups,
 };
+
+function retrieve_current_selector(element) {
+	let limit = 1000;
+	const selectors = [];
+	let cursor_index_child;
+	let cursor_element;
+	do {
+		cursor_element = cursor_element?.parentElement ?? element;
+		if (cursor_element.id) {
+			selectors.push(cursor_element.id);
+			continue;
+		}
+		const { parentElement, tagName } = cursor_element;
+		if (parentElement) {
+			const { children } = parentElement;
+			cursor_index_child = Array.from(children).indexOf(cursor_element);
+			if (cursor_index_child > 1) {
+				selectors.unshift(`${tagName}:nth-child(${cursor_index_child + 1})`);
+				continue;
+			}
+			selectors.unshift(tagName);
+			continue;
+		}
+		selectors.unshift(tagName);
+		if (!parentElement) break;
+		if ('HTML' === tagName) break;
+		if ('BODY' === tagName) break;
+	} while (limit--);
+	if (limit < 1) {
+		console.error('retrieve_current_selector : limit reached');
+		return '';
+	}
+	return selectors.join('>');
+}
 
 window.CSS_IN_JS_IN_HTML = CSS_IN_JS_IN_HTML;
