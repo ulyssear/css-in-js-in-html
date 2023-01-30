@@ -1,8 +1,8 @@
 {
   "name": "@ulyssear/css-in-js-in-html",
-  "version": "0.1.4",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.5",
+  "description": "CSS-in-JS-in-HTML is a library that allows you to use CSS-in-JS with HTML only.",
+  "main": "build/index.min.js",
   "scripts": {
     "test": "jest",
     "format": "rome format --write --indent-style tab --line-width 160 --quote-style single src/index.js",
@@ -14,8 +14,8 @@
     "lint:fix:polyfill": "rome check --apply-suggested src/polyfill.js",
     "lint:all": "rome check src",
     "lint:fix:all": "rome check --apply-suggested src",
-    "build": "esbuild src/index.js --bundle --outfile=build/index.min.js --minify --sourcemap",
-    "build:polyfill": "esbuild src/polyfill.js --bundle --outfile=build/polyfill.min.js --minify --sourcemap",
+    "build": "esbuild src/index.js --bundle --outfile=build/index.min.js --minify",
+    "build:polyfill": "esbuild src/polyfill.js --bundle --outfile=build/polyfill.min.js --minify",
     "build:all": "npm run build && npm run build:polyfill",
     "build:hot": "npm run build -- --watch",
     "build:hot:polyfill": "npm run build:polyfill -- --watch",
