@@ -73,9 +73,9 @@ jobs:
         with:
           files: |
             build/index.min.js
-            build/index.min.js.map
+            # build/index.min.js.map
             build/polyfill.min.js
-            build/polyfill.min.js.map
+            # build/polyfill.min.js.map
             package-lock.json
           tag_name: ${{ steps.package-version.outputs.current-version }}
           name: ${{ steps.package-version.outputs.current-version }}
