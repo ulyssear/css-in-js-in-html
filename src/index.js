@@ -321,13 +321,7 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 				}
 				// For each children within children of element matching selector
 				if ('>' === tag && _selectors) {
-					// console.log({tag, _selectors, children: element.children})
-					for (let k = 0; k < element.children.length; k++) {
-						const child = element.children[k];
-						if (!child.matches(_selectors)) continue;
-						// if ('>' === tag) console.log({_selectors, child, classes})
-						do_apply(child, null, classes, events, media_query);
-					}
+					do_apply(element, [`@current>${_selectors}`], classes, events, media_query);
 				}
 				//
 				// Next sibling of element matching selector
