@@ -237,6 +237,7 @@ function apply_custom_class(element, className) {
 	// window.addEventListener('resize', () => apply_custom_class(element, className));
 
 	const group_classes = split_classname_to_classes_groups(className);
+	// console.log({group_classes})
 
 	for (let i = 0; i < group_classes.length; i++) {
 		const { selectors, classes, events, media_query } = group_classes[i];
@@ -259,8 +260,6 @@ function apply_custom_class(element, className) {
 			});
 		}
 		const original_class = className;
-		// element.className = element.className.replace(className, '').trim();
-		// console.log({classes_to_apply})
 
 		// console.log({ selectors, classes_to_apply, events, media_query });
 
@@ -342,6 +341,8 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 				elements_to_apply.push(elements[k]);
 			}
 		}
+		element.className = element.className.replace("\r", '').replace("\n", '').replace("\t", '').replace(/\s\s+/g, ' ').trim();
+		element.className = element.className.replace(/\[.+\]:\{(?:\s+)?\}/g, '').trim();
 	}
 
 	if (events) {
@@ -374,8 +375,9 @@ function do_apply(element, selectors, classes, events, media_query, original_cla
 			if (!name) continue;
 			element_to_apply.style.setProperty(name, value);
 			if (to_remove_class) continue;
-			if (element.className.includes(original_class)) {
-				to_remove_class = true;
+			const class_to_remove = `${name}-[${value}]`;
+			if (element.className.includes(class_to_remove)) {
+				element.className = element.className.replace(class_to_remove, '').trim();
 			}
 		}
 	}
