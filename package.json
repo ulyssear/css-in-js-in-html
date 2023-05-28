@@ -1,25 +1,10 @@
 {
   "name": "@ulyssear/css-in-js-in-html",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "description": "CSS-in-JS-in-HTML is a library that allows you to use CSS-in-JS with HTML only.",
-  "main": "build/index.min.js",
+  "main": "main.js",
   "scripts": {
-    "test": "jest",
-    "format": "rome format --write --indent-style tab --line-width 160 --quote-style single src/index.js",
-    "format:polyfill": "rome format --write --indent-style tab --line-width 160 --quote-style single src/polyfill.js",
-    "format:all": "rome format --write --indent-style tab --line-width 160 --quote-style single src",
-    "lint": "rome check src/index.js",
-    "lint:polyfill": "rome check src/polyfill.js",
-    "lint:fix": "rome check --apply-suggested src/index.js",
-    "lint:fix:polyfill": "rome check --apply-suggested src/polyfill.js",
-    "lint:all": "rome check src",
-    "lint:fix:all": "rome check --apply-suggested src",
-    "build": "esbuild src/index.js --bundle --outfile=build/index.min.js --minify",
-    "build:polyfill": "esbuild src/polyfill.js --bundle --outfile=build/polyfill.min.js --minify",
-    "build:all": "npm run build && npm run build:polyfill",
-    "build:hot": "npm run build -- --watch",
-    "build:hot:polyfill": "npm run build:polyfill -- --watch",
-    "start": "concurrently -n \"build,build:polyfill,serve\" \"npm run build:hot\" \"npm run build:hot:polyfill\" \"npx serve build\""
+    "tests": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -30,16 +15,5 @@
     "url": "https://github.com/ulyssear/css-in-js-in-html/issues"
   },
   "homepage": "https://github.com/ulyssear/css-in-js-in-html#readme",
-  "license": "MIT",
-  "dependencies": {
-    "esbuild": "^0.16.13",
-    "rome": "^11.0.0",
-    "serve": "^14.1.2"
-  },
-  "devDependencies": {
-    "concurrently": "^7.6.0",
-    "jest": "^29.3.1",
-    "jest-puppeteer": "^6.2.0",
-    "puppeteer": "^19.5.0"
-  }
+  "license": "MIT"
 }
