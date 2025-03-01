@@ -163,3 +163,5 @@ function init() {
   }
 
 }
+const CSSinJSinHTML = {init}
+export default CSSinJSinHTML;
