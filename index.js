@@ -163,5 +163,4 @@ function init() {
   }
 
 }
-const CSSinJSinHTML = {init}
-export default CSSinJSinHTML;
+window.CSSinJSinHTML = { init };
