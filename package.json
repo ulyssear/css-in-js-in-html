@@ -1,6 +1,6 @@
 {
   "name": "@ulyssear/css-in-js-in-html",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "CSS-in-JS-in-HTML is a library that allows you to use CSS-in-JS with HTML only.",
   "main": "build/index.js",
   "scripts": {

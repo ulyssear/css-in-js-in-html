@@ -40,6 +40,7 @@ jobs:
           file_pattern: |
             ./.gitignore
             build/index.min.js
+            build/index.min.js.gz
           skip_dirty_check: true
           push_options: '--force'
           branch: ${{ steps.package-version.outputs.current-version }}
@@ -61,6 +62,7 @@ jobs:
         with:
           files: |
             build/index.min.js
+            build/index.min.js.gz
           tag_name: ${{ steps.package-version.outputs.current-version }}
           name: ${{ steps.package-version.outputs.current-version }}
           body: |

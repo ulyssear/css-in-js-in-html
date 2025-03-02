@@ -111,7 +111,7 @@ __Older browsers__
 
 1. Import `main.js` in your HTML file
    ```html
-   <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@0.2.0/build/index.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@0.3.7/build/index.min.js"></script>
    ```
 
 2. Add one line of CSS to hide the page while building (and permits to hide elements with hidden attribute)
@@ -127,7 +127,7 @@ __Older browsers__
    ```
 2. Import `main.js` in your HTML file
    ```html
-    <script src="path/to/css-in-js-in-html/main.js"></script>
+    <script src="path/to/css-in-js-in-html/build/index.min.js"></script>
     ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

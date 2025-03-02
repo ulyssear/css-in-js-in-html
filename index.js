@@ -160,7 +160,10 @@ function init() {
   main();
 }
 document.addEventListener('DOMContentLoaded', init);
+let observer;
 window.addEventListener('css-in-js-in-html-ready', function () {
-  const observer = new MutationObserver(init);
-  observer.observe(document, { attributes: true, childList: true, subtree: true });
+  if (!observer) {
+    observer = new MutationObserver(init);
+    observer.observe(document, { attributes: true, childList: true, subtree: true });
+  }
 } );
