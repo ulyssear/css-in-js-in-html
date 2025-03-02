@@ -7,26 +7,11 @@ function init() {
     return events;
   }
 
-  function getFullPathToElement(element) {
-    const path = [];
-    while (element.tagName !== 'HTML') {
-      let selector = element.tagName;
-      if (element.id) {
-        selector += '#' + element.id;
-        path.unshift(selector);
-        break;
-      } else {
-        let sib = element, nth = 1;
-        while (sib = sib.previousElementSibling) {
-          if (sib.tagName === element.tagName) nth++;
-        }
-        if (nth != 1) selector += `:nth-of-type(${nth})`;
-      }
-      path.unshift(selector);
-      element = element.parentElement;
-    }
-    path.unshift('HTML');
-    return path.join('>');
+  function generateUUID(prefix="") {
+    return (prefix ? prefix + "-" : "") + 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 
   function main() {
@@ -83,9 +68,16 @@ function init() {
 
         if (_entry.join(',') === 'events,query,classes') {
           const events = split[entry.events].split(',');
-          const query = split[entry.query].replaceAll(/current\s*,?/g, getFullPathToElement(element) + ',');
+          let query = split[entry.query].replaceAll(/current\s*,?/g, '#' + uuid + ',');
           const classes = Array.from(split[entry.classes].slice(1, -1).matchAll(regularExpressions[0])).map(e => e.slice(1));
+          if (query.startsWith('>')) {
+            query = '#' + uuid + query;
+          }
+          if (query.endsWith(',')) {
+            query = query.slice(0, -1);
+          }
           const elements = document.querySelectorAll(query);
+          element.removeAttribute('id');
           for (const element of elements) {
             for (const event of events) {
               if (event === 'hover') {
@@ -115,17 +107,18 @@ function init() {
         }
 
         if (_entry.join(',') === 'query,classes') {
-          let query = split[entry.query].replaceAll(/current\s*,?/g, getFullPathToElement(element) + ',');
+          const uuid = generateUUID('cijih');
+          element.setAttribute('id',uuid)
+          let query = split[entry.query].replaceAll(/current\s*,?/g, '#' + uuid + ',');
           const classes = Array.from(split[entry.classes].slice(1, -1).matchAll(regularExpressions[0])).map(e => e.slice(1));
           if (query.startsWith('>')) {
-            console.log('before : ', query);
-            query = getFullPathToElement(element) + query;
-            console.log('after : ', query);
+            query = '#' + uuid + query;
           }
           if (query.endsWith(',')) {
             query = query.slice(0, -1);
           }
           const elements = document.querySelectorAll(query);
+          element.removeAttribute('id');
           for (const element of elements) {
             for (const [property, value] of classes) {
               element.style.setProperty(property, value);
@@ -164,22 +157,20 @@ function init() {
 let observer;
 window.addEventListener('css-in-js-in-html-ready', function () {
   if (!observer) {
-    observer = new MutationObserver((mutationsList) => {
+    observer = new MutationObserver(function (mutationsList) {
       for (const mutation of mutationsList) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        if (
+          (mutation.type === 'childList' && mutation.addedNodes.length > 0) || 
+          (mutation.type === 'attributes' && mutation.attributeName === 'class')
+        ) {
           init();
-          break;
-        }
-        if (mutation.type === 'childList' && (mutation.addedNodes.length || mutation.removedNodes.length)) {
-          init();
-          break;
         }
       }
     });
 
     observer.observe(document.body, {
-      attributes: true,
       childList: true,
+      attributes: true,
       subtree: true,
       attributeFilter: ['class']
     });
