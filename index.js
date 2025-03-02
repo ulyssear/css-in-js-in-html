@@ -1,12 +1,10 @@
 function init() {
+  const EVENTS = getAllEventsNames();
+
   function getAllEventsNames() {
     const events = Array.from(Object.keys(window).filter(key => /^on/.test(key)).map(e => e.slice(2)));
     events.push('hover');
     return events;
-  }
-
-  function getAllElementsTagsNames() {
-    return Array.from(document.querySelectorAll('*')).map(e => e.tagName);
   }
 
   function getFullPathToElement(element) {
@@ -152,12 +150,12 @@ function init() {
         element.className = element.className.replace(_, '').trim();
       }
     }
+
+    document.documentElement.setAttribute('aria-busy', 'false');
+
     const event = new Event('css-in-js-in-html-ready');
     document.dispatchEvent(event);
   }
-
-  const EVENTS = getAllEventsNames();
-  const ELEMENTS_TAGS = getAllElementsTagsNames();
 
   main();
 }
