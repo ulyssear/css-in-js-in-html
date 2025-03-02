@@ -47,7 +47,7 @@ function init() {
     }
     const regularExpressions = [
       /([a-zA-Z0-9\-,]+)-\[([a-zA-Z0-9 .%#,\-()'"\/]+)\]/g,
-      /((?:\[[a-zA-Z0-9\-@():>, ]+\]:)*)\{\s*?((?:[a-zA-Z\-]+-\[[a-zA-Z0-9,%. \-()/ ]+\]\s*?)+)\}/g
+      /((?:\[[a-zA-Z0-9\-@():>,+ ]+\]:)*)\{\s*?((?:[a-zA-Z\-]+-\[[a-zA-Z0-9,%. \-()/ ]+\]\s*?)+)\}/g
     ];
     for (const element of elements) {
       const matches = element.className.matchAll(regularExpressions[1]);
