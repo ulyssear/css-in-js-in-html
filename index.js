@@ -118,7 +118,9 @@ function init() {
           let query = split[entry.query].replaceAll(/current\s*,?/g, getFullPathToElement(element) + ',');
           const classes = Array.from(split[entry.classes].slice(1, -1).matchAll(regularExpressions[0])).map(e => e.slice(1));
           if (query.startsWith('>')) {
+            console.log('before : ', query);
             query = getFullPathToElement(element) + query;
+            console.log('after : ', query);
           }
           if (query.endsWith(',')) {
             query = query.slice(0, -1);
@@ -159,11 +161,28 @@ function init() {
 
   main();
 }
-document.addEventListener('DOMContentLoaded', init);
 let observer;
 window.addEventListener('css-in-js-in-html-ready', function () {
   if (!observer) {
-    observer = new MutationObserver(init);
-    observer.observe(document, { attributes: true, childList: true, subtree: true });
+    observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          init();
+          break;
+        }
+        if (mutation.type === 'childList' && (mutation.addedNodes.length || mutation.removedNodes.length)) {
+          init();
+          break;
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      attributeFilter: ['class']
+    });
   }
-} );
+});
+document.addEventListener('DOMContentLoaded', init);

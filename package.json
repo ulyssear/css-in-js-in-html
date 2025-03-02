@@ -1,12 +1,12 @@
 {
   "name": "@ulyssear/css-in-js-in-html",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "CSS-in-JS-in-HTML is a library that allows you to use CSS-in-JS with HTML only.",
   "main": "build/index.js",
   "scripts": {
     "tests": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild index.js --bundle --outfile=build/index.min.js --minify",
-    "compress": "node scripts/compress.js"
+    "compress": "node scripts/compress.js",
+    "build": "npm run compress && esbuild index.js --bundle --outfile=build/index.min.js --minify"
   },
   "repository": {
     "type": "git",
