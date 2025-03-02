@@ -1,5 +1,4 @@
 function init() {
-
   function getAllEventsNames() {
     const events = Array.from(Object.keys(window).filter(key => /^on/.test(key)).map(e => e.slice(2)));
     events.push('hover');
@@ -31,11 +30,6 @@ function init() {
     path.unshift('HTML');
     return path.join('>');
   }
-
-  const EVENTS = getAllEventsNames();
-  const ELEMENTS_TAGS = getAllElementsTagsNames();
-
-  document.addEventListener('DOMContentLoaded', main);
 
   function main() {
     const elements = document.querySelectorAll('[class*="["]');
@@ -162,5 +156,11 @@ function init() {
     document.dispatchEvent(event);
   }
 
+  const EVENTS = getAllEventsNames();
+  const ELEMENTS_TAGS = getAllElementsTagsNames();
+
+  main();
 }
-window.CSSinJSinHTML = { init };
+document.addEventListener('DOMContentLoaded', init);
+const observer = new MutationObserver(init);
+observer.observe(document, { attributes: true, childList: true, subtree: true });
