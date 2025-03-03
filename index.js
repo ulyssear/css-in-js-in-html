@@ -70,7 +70,7 @@ function init() {
 
         const __entry = _entry.join(',')
 
-        if (_entry.includes('query,')) {
+        if (__entry.includes('query,')) {
           uuid = generateUUID('cijih');
           element.setAttribute('id', uuid);
         }
