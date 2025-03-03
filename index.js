@@ -66,6 +66,15 @@ function init() {
         }
         const _entry = Object.entries(entry).sort((a, b) => a[1] - b[1]).filter(e => e[1] !== undefined).map(e => e[0]);
 
+        let uuid;
+
+        const __entry = _entry.join(',')
+
+        if (_entry.includes('query,')) {
+          uuid = generateUUID('cijih');
+          element.setAttribute('id', uuid);
+        }
+
         if (_entry.join(',') === 'events,query,classes') {
           const events = split[entry.events].split(',');
           let query = split[entry.query].replaceAll(/current\s*,?/g, '#' + uuid + ',');
