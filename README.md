@@ -19,11 +19,6 @@
   <p align="center">
     CSS-in-JS without CSS and JS
     <br />
-    <a href="https://github.com/ulyssear/css-in-js-in-html"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/ulyssear/css-in-js-in-html">View Demo</a>
-    ·
     <a href="https://github.com/ulyssear/css-in-js-in-html/issues">Report Bug</a>
     ·
     <a href="https://github.com/ulyssear/css-in-js-in-html/issues">Request Feature</a>
@@ -45,12 +40,10 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#compatible-browsers">Compatible browsers</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -84,74 +77,40 @@ CSS-in-JS-in-HTML is a JavaScript library which permits you to apply CSS propert
 <!-- GETTING STARTED -->
 ## Getting Started
 
-### Prerequisites
+### Compatible browsers
 
-> ⚠️ The following prerequisites were tested with the version 0.1.6 of the library and not the current version. However, the compatibility should be the same.
-
-The followed prerequisites are the minimum requirements to use the library. The library may work with older browsers with the polyfills but it's not guaranteed (and recommended).
-
-__Modern browers__
-  - Chrome 9+
-  - Edge 12+
-  - Firefox 6+
-  - Safari 5.1+
-  - Opera 12.1+
-
-__Browsers for mobile__
-  - IOS Safari 5.1+
-  - UC Browser for Android 11
-  - Firefox for Android 49
-
-__Older browsers__
-  - IE10+
+* Chrome : 73+
+* Firefox : 67+
+* Safari : 13+
+* Edge (Chromium) : 79+
+* Opera : 60+
+* Samsung Internet : 11.1+
+* iOS Safari : 13+
 
 ### Installation
 
 #### From CDN
 
 1. Import `main.js` in your HTML file
-   ```html
-   <script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@0.3.13/build/index.min.js"></script>
-   ```
+```html
+<script src="https://cdn.jsdelivr.net/gh/ulyssear/css-in-js-in-html@0.4.0/build/index.min.js"></script>
+```
 
 2. Add one line of CSS to hide the page while building (and permits to hide elements with hidden attribute)
-  ```css
-  html[aria-busy="true"], [hidden] { display: none!important; }
-  ```
+```css
+[hidden]:not([hidden="false"]) { display: none!important; }
+```
 
 #### Manual installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/ulyssear/css-in-js-in-html.git
-   ```
+```sh
+git clone https://github.com/ulyssear/css-in-js-in-html.git
+```
 2. Import `main.js` in your HTML file
-   ```html
-    <script src="path/to/css-in-js-in-html/build/index.min.js"></script>
-    ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-<!-- TODO : ADD examples -->
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-<!-- TODO : ADD roadmap
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
--->
-See the [open issues](https://github.com/ulyssear/css-in-js-in-html/issues) for a full list of proposed features (and known issues).
+```html
+<script src="path/to/css-in-js-in-html/build/index.min.js"></script>
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
