@@ -6,7 +6,7 @@
   "scripts": {
     "tests": "echo \"Error: no test specified\" && exit 1",
     "compress": "node scripts/compress.js",
-    "build": "esbuild index.js --bundle --outfile=build/index.min.js --minify && npm run compress && cp index.js build/index.js"
+    "build": "esbuild src/index.js --bundle --outfile=build/index.min.js --minify && npm run compress && cp src/index.js build/index.js"
   },
   "repository": {
     "type": "git",
